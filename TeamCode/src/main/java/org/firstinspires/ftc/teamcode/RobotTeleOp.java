@@ -1,53 +1,35 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "FTC Robot", group = "TeleOp")
-public class RobotTeleOp extends OpMode {
+@TeleOp(name = "FTC Robot", group = "RobotStuff")
+public class RobotTeleOp extends LinearOpMode {
 
     private DcMotor motorLeft;
     private DcMotor motorRight;
-    private Config config;
+   // private Config config;
 
-    @Override
-    public void init() {
-        config = new Config();
+
+
+    public void runOpMode() throws InterruptedException
+    {
         initMotors();
+        waitForStart();
+
+        while(opModeIsActive()) {
+            updateMotorPower(gamepad1.left_stick_y);
+            idle();
+        }
     }
-
-    @Override
-    public void loop() {
-        updateMotorPower();
-    }
-
-    @Override
-    public void stop() {
-        updateMotorPower();
-    }
-
-
-//    public void runOpMode() throws InterruptedException
-//    {
-//        config = new Config();
-//        initMotors();
-//        waitForStart();
-//
-//        while(opModeIsActive()) {
-//            updateMotorPower();
-//            idle();
-//        }
-//    }
 
     private void initMotors()
     {
-        motorRight = hardwareMap.dcMotor.get(config.getMotorRight());
-        motorLeft = hardwareMap.dcMotor.get(config.getMotorLeft());
-//
-//        motorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        motorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //config = new Config();
+        motorRight = hardwareMap.dcMotor.get("motorRight");
+        motorLeft = hardwareMap.dcMotor.get("motorLeft");
 
         inverseMotorDirections();
     }
@@ -59,10 +41,10 @@ public class RobotTeleOp extends OpMode {
         motorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    private void updateMotorPower()
+    private void updateMotorPower(float power)
     {
-        motorLeft.setPower(20);
-        motorRight.setPower(20);
+        motorLeft.setPower(power);
+        motorRight.setPower(power);
     }
 }
 
