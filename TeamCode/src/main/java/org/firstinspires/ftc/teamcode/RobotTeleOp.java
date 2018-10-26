@@ -8,28 +8,31 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "FTC Robot", group = "RobotStuff")
 public class RobotTeleOp extends LinearOpMode {
 
-    private DcMotor motorLeft;
-    private DcMotor motorRight;
+    private DcMotor driveMotorLeft;
+    private DcMotor driveMotorRight;
    // private Config config;
 
 
 
     public void runOpMode() throws InterruptedException
     {
-        initMotors();
+        initDriveMotors();
         waitForStart();
 
         while(opModeIsActive()) {
-            updateMotorPower(gamepad1.left_stick_y);
+
+            updateMotorPower(gamepad1.left_stick_y + ((gamepad1.right_stick_x + 1) * (gamepad1.right_stick_x * 5)), gamepad1.left_stick_y + ((gamepad1.right_stick_x - 1) * (gamepad1.right_stick_x * 5)));
+
+
             idle();
         }
     }
 
-    private void initMotors()
+    private void initDriveMotors()
     {
         //config = new Config();
-        motorRight = hardwareMap.dcMotor.get("motorRight");
-        motorLeft = hardwareMap.dcMotor.get("motorLeft");
+        driveMotorRight = hardwareMap.dcMotor.get("motorRight");
+        driveMotorLeft = hardwareMap.dcMotor.get("motorLeft");
 
         inverseMotorDirections();
     }
@@ -37,14 +40,14 @@ public class RobotTeleOp extends LinearOpMode {
     private void inverseMotorDirections()
     {
         // Inverse directions of motors.
-        motorRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        motorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        driveMotorLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        driveMotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    private void updateMotorPower(float power)
+    private void updateMotorPower(float powerLeft, float powerRight)
     {
-        motorLeft.setPower(power);
-        motorRight.setPower(power);
+        driveMotorLeft.setPower(powerRight);
+        driveMotorRight.setPower(powerLeft);
     }
 }
 
