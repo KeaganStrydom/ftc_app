@@ -1,29 +1,31 @@
 package org.firstinspires.ftc.teamcode;
 
 public class Config {
-    public String getMotorRight() {
+    public String getDriveRight() {
         return "motorRight";
     }
 
-    public String getMotorLeft() {
+    public String getDriveLeft() {
         return "motorLeft";
     }
 
-    public String getDeliveryServoLeft() {
-        return "deliveryServoLeft";
+
+    public String getCollectionRight() {
+        return  "servoRight";
     }
 
-    public String getDeliveryServoRight() {
-        return "deliveryServoRight";
+    public String getCollectionLeft() {
+        return  "servoLeft";
     }
 
-    public String getConveyorRight() {
-        return "conveyorRight";
+    public String getMotorTop() {
+        return  "motorTop";
     }
 
-    public String getConveyorLeft() {
-        return "conveyorLeft";
+    public String getMotorBottom() {
+        return  "motorBottom";
     }
+
 
 }
 
