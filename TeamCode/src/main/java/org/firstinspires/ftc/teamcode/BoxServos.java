@@ -10,12 +10,15 @@ public class BoxServos {
     private Servo left;
 
 
-    public void configure(Config withConfig, HardwareMap accessor) {
-        left  = accessor.servo.get(withConfig.boxLeft());
-        right = accessor.servo.get(withConfig.boxRight());
+    public void configureWith(HardwareMap accessor) {
+
+        final Config withConfig = new Config();
+
+        this.left  = accessor.servo.get(withConfig.boxLeft());
+        this.right = accessor.servo.get(withConfig.boxRight());
     }
 
-    void Move(Gamepad gamepad) {
+    void updatePositionsUsing(Gamepad gamepad) {
         if (gamepad.a) {
 
             switch ((int) left.getPosition()) {

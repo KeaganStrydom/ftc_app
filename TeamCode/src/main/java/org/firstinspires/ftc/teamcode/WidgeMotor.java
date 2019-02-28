@@ -9,11 +9,14 @@ public class WidgeMotor {
     private DcMotor motor;
 
 
-    public void configure(Config withConfig, HardwareMap accessor) {
-        motor  = accessor.dcMotor.get(withConfig.widgeMotor());
+    public void configureWith(HardwareMap accessor) {
+
+        final Config withConfig = new Config();
+
+        this.motor = accessor.dcMotor.get(withConfig.widgeMotor());
     }
 
-    void Move(Gamepad gamepad) {
+    void moveUsing(Gamepad gamepad) {
         final double ACTIVE = 1.0;
 
         if (gamepad.left_trigger == ACTIVE) {

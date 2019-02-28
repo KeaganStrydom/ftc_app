@@ -9,13 +9,16 @@ public class CollectionServos {
     private CRServo right;
     private CRServo left;
 
-    public void configure(Config withConfig, HardwareMap accessor) {
-        left  = accessor.crservo.get(withConfig.collectionLeft());
-        right = accessor.crservo.get(withConfig.collectionRight());
+    public void configureWith(HardwareMap accessor) {
+
+        final Config withConfig = new Config();
+
+        this.left  = accessor.crservo.get(withConfig.collectionLeft());
+        this.right = accessor.crservo.get(withConfig.collectionRight());
     }
 
 
-    void Move(Gamepad gamepad) {
+    void moveUsing(Gamepad gamepad) {
         if (gamepad.a) {
 
             // Feed in balls
